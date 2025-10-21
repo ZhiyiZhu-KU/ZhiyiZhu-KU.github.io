@@ -58,6 +58,8 @@
             margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            border-bottom: 1px solid #000;    /* ← 这行添加黑色下划线 */
+            padding-bottom: 5px;
         }
         
         .subsection-title {
@@ -89,12 +91,20 @@
         .publication {
             margin-bottom: 12px;
             text-align: justify;
+            padding-left: 20px;           /* 左边留空间 */
+            position: relative;
+        }
+        
+        .publication::before {
+            content: "•";                 /* ← 这是"点"符号 */
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2em;
         }
         
         .publication-number {
-            float: left;
-            margin-right: 10px;
-            font-weight: bold;
+            display: none;                /* 隐藏原来的数字编号 */
         }
         
         .publication-content {
