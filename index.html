@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zhiyi Zhu - Curriculum Vitae</title>
+    <title>Zhiyi Zhu - Personal Website</title>
     <style>
         * {
             margin: 0;
@@ -16,38 +16,186 @@
             line-height: 1.6;
             color: #000;
             background: #fff;
-            padding: 40px 20px;
-            max-width: 900px;
-            margin: 0 auto;
         }
         
+        /* 导航栏样式 */
+        .navbar {
+            background-color: transparent;  /* 移除背景色 */
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            background: #fff;  /* 白色背景 */
+            border-bottom: 1px solid #e0e0e0;  /* 添加淡灰色底部边框作为分隔 */
+        }
+        
+        .navbar-container {
+            max-width: 600px;  /* 控制导航栏内容区域宽度 */
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            color: #000;  /* 黑色文字 */
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 8px 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;  /* 默认透明下划线 */
+        }
+        
+        .nav-link:hover {
+            color: #333;  /* 鼠标悬停时稍微淡一点的黑色 */
+        }
+        
+        .nav-link.active {
+            color: #000;  /* 黑色文字 */
+            font-weight: bold;
+            border-bottom: 2px solid #000;  /* 黑色下划线 */
+        }
+        
+        /* 页面容器 */
+        .page-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* Header样式 - 包含照片 */
         .header {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 30px;
             margin-bottom: 30px;
             padding-bottom: 20px;
             border-bottom: 2px solid #000;
         }
         
-        .header h1 {
+        .profile-photo {
+            flex-shrink: 0;
+        }
+        
+        .profile-photo img {
+            width: 180px;
+            height: 220px;
+            border-radius: 8px;  /* 轻微圆角 */
+            object-fit: cover;
+            border: 3px solid #2c3e50;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        /* 如果没有照片，显示占位符 */
+        .profile-photo .placeholder {
+            width: 180px;
+            height: 220px;
+            border-radius: 8px;  /* 轻微圆角 */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3em;
+            font-weight: bold;
+            border: 3px solid #2c3e50;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .header-info {
+            flex-grow: 1;
+        }
+        
+        .header-info h1 {
             font-size: 2em;
             margin-bottom: 10px;
             font-weight: bold;
         }
         
-        .header .contact {
+        .header-info .contact {
             font-size: 0.95em;
             line-height: 1.8;
         }
         
-        .header .contact a {
+        .header-info .contact a {
             color: #0066cc;
             text-decoration: none;
         }
         
-        .header .contact a:hover {
+        .header-info .contact a:hover {
             text-decoration: underline;
         }
         
+        /* Home页面样式 */
+        .home-item {
+            padding-left: 25px;
+            margin-bottom: 25px;
+            position: relative;
+            line-height: 1.8;
+        }
+        
+        /* 添加bullet point */
+        .home-item::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #000;
+        }
+        
+        .home-item .date {
+            color: #666;
+            font-style: italic;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        
+        .home-item h3 {
+            color: #000;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        .home-item p {
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+        
+        /* 新闻图片样式 */
+        .home-image {
+            margin-top: 12px;
+        }
+        
+        .home-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+        }
+        
+        .home-image .caption {
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic;
+            margin-top: 8px;
+        }
+        
+        /* Profile页面样式 */
         .section {
             margin-bottom: 30px;
         }
@@ -58,7 +206,7 @@
             margin-bottom: 15px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            border-bottom: 1px solid #000;    /* ← 这行添加黑色下划线 */
+            border-bottom: 1px solid #000;
             padding-bottom: 5px;
         }
         
@@ -90,12 +238,12 @@
         .publication {
             margin-bottom: 12px;
             text-align: justify;
-            padding-left: 20px;           /* 左边留空间 */
+            padding-left: 20px;
             position: relative;
         }
         
         .publication::before {
-            content: "•";                 /* ← 这是"点"符号 */
+            content: "•";
             position: absolute;
             left: 0;
             font-weight: bold;
@@ -103,7 +251,7 @@
         }
         
         .publication-number {
-            display: none;                /* 隐藏原来的数字编号 */
+            display: none;
         }
         
         .publication-content {
@@ -128,228 +276,389 @@
             margin-bottom: 8px;
         }
         
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .navbar-container {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .nav-link {
+                font-size: 1em;
+                padding: 6px 12px;
+            }
+        }
+        
         @media print {
-            body {
+            .navbar {
+                display: none;
+            }
+            
+            .page-container {
                 padding: 20px;
                 font-size: 11pt;
             }
-            .date {
-                float: right;
+            
+            .page {
+                display: block !important;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>ZHIYI ZHU (朱 致儀)</h1>
-        <div class="contact">
-            School of System Informatics, Kobe University<br>
-            <a href="https://orcid.org/0009-0009-4058-5887" target="_blank">ORCID: 0009-0009-4058-5887</a><br>
-            <a href="https://researchmap.jp/zzy17171177" target="_blank">researchmap</a> 
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="nav-link active" onclick="showPage('home')">Home</a>
+            <a class="nav-link" onclick="showPage('profile')">Profile</a>
+            <a class="nav-link" onclick="showPage('publications')">Publications</a>
         </div>
+    </nav>
+
+    <!-- 页面容器 -->
+    <div class="page-container">
+
+        <!-- Home页面 -->
+        <div id="home" class="page active">
+            <div class="header">
+                <div class="profile-photo">
+                    <img src="IMG_4781.jpg" alt="Zhiyi Zhu">
+                </div>
+                <div class="header-info">
+                    <h1>ZHIYI ZHU (朱 致儀)</h1>
+                    <div class="contact">
+                        Assistant Professor (Project-based)<br>
+                        School of System Informatics, Kobe University<br>
+                        <a href="https://orcid.org/0009-0009-4058-5887" target="_blank">ORCID</a> | 
+                        <a href="https://researchmap.jp/zzy17171177" target="_blank">researchmap</a>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 style="margin-bottom: 20px; color: #2c3e50;">News & Research Activities</h2>
+            
+            <div class="home-item">
+                <div class="date">October 2025</div>
+                <h3>Paper Accepted at VTC2025-Fall</h3>
+                <p>Our paper "A Study on E2E Performance Improvement of Platooning Using Outdoor LiFi" has been accepted for presentation at IEEE 102nd Vehicular Technology Conference (VTC2025-Fall).</p>
+                <!-- 示例：如果有会议或论文相关照片 -->
+                <!-- 
+                <div class="news-image">
+                    <img src="vtc2025-presentation.jpg" alt="VTC2025 Conference">
+                    <div class="caption">VTC2025 Conference Presentation</div>
+                </div>
+                -->
+            </div>
+            
+            <div class="home-item">
+                <div class="date">September 2025</div>
+                <h3>Successfully Defended Ph.D. Thesis</h3>
+                <p>I successfully defended my doctoral dissertation titled "Research on Handover Decision Algorithms for 5G Heterogeneous Networks" at Kobe University.</p>
+                <!-- 示例：如果有答辩现场照片 -->
+                <!-- 
+                <div class="news-image">
+                    <img src="phd-defense.jpg" alt="Ph.D. Defense">
+                    <div class="caption">Ph.D. Thesis Defense at Kobe University</div>
+                </div>
+                -->
+            </div>
+            
+            <div class="home-item">
+                <div class="date">September 2025</div>
+                <h3>Presentation at IEICE Society Conference 2025</h3>
+                <p>Presented our work on "A Study on gNodeB Type Encoding for Handover Control" at IEICE Society Conference 2025.</p>
+            </div>
+            
+            <div class="home-item">
+                <div class="date">June 2025</div>
+                <h3>Joined SeMI Research Technical Committee</h3>
+                <p>I joined as a Committee Member of the Sensor Network and Mobile Intelligence (SeMI) Research Technical Committee at IEICE.</p>
+            </div>
+            
+            <div class="home-item">
+                <div class="date">April 2025</div>
+                <h3>Started Position as Assistant Professor</h3>
+                <p>I started my position as Assistant Professor (Project-based) at the School of System Informatics, Kobe University.</p>
+                <!-- 示例：如果有学校或实验室照片 -->
+                <!-- 
+                <div class="news-image">
+                    <img src="kobe-university.jpg" alt="Kobe University">
+                    <div class="caption">School of System Informatics, Kobe University</div>
+                </div>
+                -->
+            </div>
+            
+            <!-- 添加新新闻的模板：
+            <div class="news-item">
+                <div class="date">月份 年份</div>
+                <h3>新闻标题</h3>
+                <p>新闻内容描述。</p>
+                <div class="news-image">
+                    <img src="图片路径.jpg" alt="图片描述">
+                    <div class="caption">图片说明文字（可选）</div>
+                </div>
+            </div>
+            -->
+        </div>
+
+        <!-- Profile页面 -->
+        <div id="profile" class="page">
+            <div class="header">
+                <div class="profile-photo">
+                    <img src="IMG_4781.jpg" alt="Zhiyi Zhu">
+                    <div class="placeholder">ZZ</div>
+                </div>
+                <div class="header-info">
+                    <h1>ZHIYI ZHU (朱 致儀)</h1>
+                    <div class="contact">
+                        School of System Informatics, Kobe University<br>
+                        <a href="https://orcid.org/0009-0009-4058-5887" target="_blank">ORCID: 0009-0009-4058-5887</a><br>
+                        <a href="https://researchmap.jp/zzy17171177" target="_blank">researchmap</a> 
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">EDUCATION</div>
+                
+                <div class="entry">
+                    <span class="date">Sep. 2025</span>
+                    <div class="entry-title">Ph.D. in Engineering</div>
+                    <div class="entry-detail">Kobe University, Kobe, Japan</div>
+                    <div>Doctoral Thesis: "Research on Handover Decision Algorithms for 5G Heterogeneous Networks"</div>
+                </div>
+                
+                <div class="entry">
+                    <span class="date">Sep. 2021</span>
+                    <div class="entry-title">M.Eng. in Engineering</div>
+                    <div class="entry-detail">Ritsumeikan University, Kyoto, Japan</div>
+                </div>
+                
+                <div class="entry">
+                    <span class="date">Mar. 2019</span>
+                    <div class="entry-title">Japanese Language School</div>
+                    <div class="entry-detail">Kansai Language Institute, Osaka, Japan</div>
+                </div>
+                
+                <div class="entry">
+                    <span class="date">June 2017</span>
+                    <div class="entry-title">B.Eng. in Electronic Information Engineering</div>
+                    <div class="entry-detail">ShaoXing University, Shaoxing, China</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">PROFESSIONAL APPOINTMENTS</div>
+                
+                <div class="entry">
+                    <span class="date">Apr. 2025 - Present</span>
+                    <div class="entry-title">Assistant Professor (Project-based)</div>
+                    <div class="entry-detail">Kobe University, School of System Informatics, Kobe, Japan</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">RESEARCH INTERESTS</div>
+                <div style="padding-left: 20px; text-align: justify;">
+                    I am broadly interested in mobile communication networks, network performance analysis and optimization. 
+                    Specifically, I have been focused on the following main themes:
+                    <ul style="margin-top: 10px;">
+                        <li><strong>5G/6G technologies:</strong> Handover optimization, mobility management, mmWave</li>
+                        <li><strong>C-V2X:</strong> Resource allocation, Reinforcement learning</li>
+                        <li><strong>Performance analysis:</strong> Network modeling, Petri nets, Poisson point process</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">TEACHING EXPERIENCE</div>
+                <ul>
+                    <li>Exercise 2, Kobe University</li>
+                    <li>Comprehensive Experiment 2, Kobe University</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <div class="section-title">PROFESSIONAL ACTIVITY</div>
+                
+                <div class="subsection-title">Committee Memberships</div>
+                <div class="entry">
+                    <span class="date">June 2025 - Present</span>
+                    <div>Committee Member, Sensor Network and Mobile Intelligence (SeMI) Research Technical Committee</div>
+                </div>
+                <div class="entry">
+                    <span class="date">Aug. 2025</span>
+                    <div>Program Committee Member, The 36th IEEE International Symposium on Software Reliability Engineering of AISQ Workshop</div>
+                </div>
+                
+                <div class="subsection-title">Presentations</div>
+                <div class="publication">
+                    <div class="publication-number">1.</div>
+                    <div class="publication-content"><span class="paper-title">A Study on gNodeB Type Encoding for Handover Control</span>, IEICE Society Conference 2025, September 2025.</div>
+                </div>
+                <div class="publication">
+                    <div class="publication-number">2.</div>
+                    <div class="publication-content"><span class="paper-title">Improving Handover Performance Using Cell ID-Based Decision Algorithm</span>, Sensor Network and Mobile Intelligence (SeMI) Forum 2025, June 2025.</div>
+                </div>
+                <div class="publication">
+                    <div class="publication-number">3.</div>
+                    <div class="publication-content"><span class="paper-title">A Study on Improving Handover Performance Based on Handover Direction in a HetNet</span>, IEICE General Conference 2025, March 2025.</div>
+                </div>
+                <div class="publication">
+                    <div class="publication-number">4.</div>
+                    <div class="publication-content"><span class="paper-title">Mitigating Handover Failures in HetNet Using Downlink CQI</span>, Kobe University Interdisciplinary Collaborative Research Presentation, March 2024.</div>
+                </div>
+                
+                <div class="subsection-title">Review</div>
+                <div style="padding-left: 20px;">
+                    <strong>Journals:</strong> IEICE Transactions on Communications (EB), IEICE Transactions on Information and Systems (ED).
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">RESEARCH GRANTS</div>
+                <div class="entry">
+                    <span class="date">Nov. 2021 - Sep. 2024</span>
+                    <div class="entry-title">Development of Performance Evaluation Method for Inter-Heterogeneous Network Handover Schemes Using Petri Nets</div>
+                    <div class="entry-detail">Kobe University "Next-Generation Outstanding Doctoral Human Resources Development Project through Interdisciplinary Co-creation"</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">PROFESSIONAL MEMBERSHIPS</div>
+                <ul>
+                    <li>Information Processing Society of Japan (IPSJ), April 2025 - Present</li>
+                    <li>Operations Research Society of Japan (ORSJ), July 2022 - Present</li>
+                    <li>IEEE Reliability Society, January 2022 - Present</li>
+                    <li>IEEE Communications Society, January 2022 - Present</li>
+                    <li>Institute of Electronics, Information and Communication Engineers (IEICE), December 2021 - Present</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Publications页面 -->
+        <div id="publications" class="page">
+            <h2 style="margin-bottom: 30px; color: #2c3e50; border-bottom: 2px solid #000; padding-bottom: 10px;">PUBLICATIONS</h2>
+            
+            <div class="section">
+                <div class="section-title">Journal Papers</div>
+                
+                <div class="publication">
+                    <div class="publication-number">1.</div>
+                    <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, E. Takimoto, P. Finnerty, and C. Ohta, <span class="paper-title">A CQI and Hysteretic-based Decision Algorithm to Prevent Handover Failures for Pedestrian Mobility in Mobile Communication HetNet</span>, <i>IEEE Access</i>, vol. 12, pp. 92348-92367, 2024.</div>
+                </div>
+                
+                <div class="publication">
+                    <div class="publication-number">2.</div>
+                    <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, J. Zheng, E. Takimoto, P. Finnerty, and C. Ohta, <span class="paper-title">Directional Handover Analysis with Stochastic Petri Net and Poisson Point Process in Heterogeneous Networks</span>, <i>Mathematics</i>, January 2025.</div>
+                </div>
+                
+                <div class="publication">
+                    <div class="publication-number">3.</div>
+                    <div class="publication-content">S. Chen, L. Yang, Y. Zhang, M. Zhang, Y. Xie, <span class="author-highlight">Z. Zhu</span>, and J. Li, <span class="paper-title">Digital Human Technology in E-Learning: Custom Content Solutions</span>, <i>Applied Sciences</i>, vol. 15(7), pp. 3807-3807, March 2025.</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">Conference Proceedings</div>
+                
+                <div class="publication">
+                    <div class="publication-number">1.</div>
+                    <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, E. Takimoto, P. Finnerty, and C. Ohta, <span class="paper-title">A Study on E2E Performance Improvement of Platooning Using Outdoor LiFi</span>, <i>IEEE 102nd Vehicular Technology Conference (VTC2025-Fall)</i>, October 2025.</div>
+                </div>
+                
+                <div class="publication">
+                    <div class="publication-number">2.</div>
+                    <div class="publication-content">Y. Sun, <span class="author-highlight">Z. Zhu</span>, P. Finnerty, and C. Ohta, <span class="paper-title">An Enhancement of RSSI-Based Localization Using Optimization Algorithm with RSSI Differential Value and Kalman Filter</span>, <i>IEEE GCCE</i>, September 2025.</div>
+                </div>
+                
+                <div class="publication">
+                    <div class="publication-number">3.</div>
+                    <div class="publication-content">S. Chen, L. Yang, Y. Xie, <span class="author-highlight">Z. Zhu</span>, J. Li, Y. Zhang, and M. Zhang, <span class="paper-title">Developing a Web Service for Creating E-Learning Video Using Digital Human and Educational Content</span>, <i>The 8th Eurasian Conference on Educational Innovation 2025 (ECEI 2025)</i>, February 2025.</div>
+                </div>
+                
+                <div class="publication">
+                    <div class="publication-number">4.</div>
+                    <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, J. Zheng, E. Takimoto, P. Finnerty, and C. Ohta, <span class="paper-title">Evaluating the A3RSRP Handover to Determine Optimal Performance in HetNet using Stochastic Petri Net</span>, <i>2024 6th International Conference on System Reliability and Safety Engineering (SRSE)</i>, pp. 469-474, October 2024.</div>
+                </div>
+                
+                <div class="publication">
+                    <div class="publication-number">5.</div>
+                    <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, C. Ohta, T. Kamada, E. Takimotol, and J. Zheng, <span class="paper-title">Evaluating the Effects of Different Handover Algorithms for Het-Nets Using Petri Nets</span>, <i>IEICE Technical Report NS seminar</i>, vol. 121(356), pp. 19-24, January 2022.</div>
+                </div>
+                
+                <div class="publication">
+                    <div class="publication-number">6.</div>
+                    <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, T. Nishimura, E. Takimoto, and J. Zheng, <span class="paper-title">Performance Evaluation of Heterogeneous Cellular Networks Using Stochastic Petri Nets</span>, <i>2021 International Conference on Software, Telecommunications and Computer Networks (SoftCOM)</i>, September 2021.</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">Technical Reports & Preprints</div>
+                
+                <div class="publication">
+                    <div class="publication-number">1.</div>
+                    <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, <span class="paper-title">Research on Handover Decision Algorithms for 5G Heterogeneous Networks</span>, <i>Ph.D. Dissertation</i>, Kobe University, September 2025.</div>
+                </div>
+                
+                <div class="publication">
+                    <div class="publication-number">2.</div>
+                    <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, E. Takimoto, P. Finnerty, J. Zheng, S. Suzuki, and C. Ohta, <span class="paper-title">NR Cell Identity-based Handover Decision-making Algorithm for High-speed Scenario within Dual Connectivity</span>, <i>arXiv preprint</i>, June 2025.</div>
+                </div>
+                
+                <div class="publication">
+                    <div class="publication-number">3.</div>
+                    <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, E. Takimoto, P. Finnerty, and C. Ohta, <span class="paper-title">A Study on E2E Performance Improvement of Platooning Using Outdoor LiFi</span>, <i>arXiv preprint</i>, June 2025.</div>
+                </div>
+                
+                <div class="publication">
+                    <div class="publication-number">4.</div>
+                    <div class="publication-content">Y. Shirasaki, P. Finnerty, <span class="author-highlight">Z. Zhu</span>, and C. Ohta, <span class="paper-title">A Study on Cache Policy Considering Regional Locality in Information-Oriented Networks</span>, <i>IEICE Technical Report NS</i>, vol. 125(57), pp. 37-42, May 2025.</div>
+                </div>
+                
+                <div class="publication">
+                    <div class="publication-number">5.</div>
+                    <div class="publication-content">S. Aihara, P. Finnerty, <span class="author-highlight">Z. Zhu</span>, and C. Ohta, <span class="paper-title">A Study on Job Scheduling Method Considering Business Hours</span>, <i>IPSJ HPC Workshop</i>, September 2025.</div>
+                </div>
+                
+                <div class="publication">
+                    <div class="publication-number">6.</div>
+                    <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, J. Zheng, and E. Takimoto, <span class="paper-title">Performance Evaluation of Heterogeneous Cellular Networks Using Stochastic Petri Nets</span>, <i>IEICE Technical Report R</i>, vol. 121(64), pp. 19-24, June 2021.</div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="section">
-        <div class="section-title">EDUCATION</div>
-        
-        <div class="entry">
-            <span class="date">Sep. 2025</span>
-            <div class="entry-title">Ph.D. in Engineering</div>
-            <div class="entry-detail">Kobe University, Kobe, Japan</div>
-            <div>Doctoral Thesis: "Research on Handover Decision Algorithms for 5G Heterogeneous Networks"</div>
-        </div>
-        
-        <div class="entry">
-            <span class="date">Sep. 2021</span>
-            <div class="entry-title">M.Eng. in Engineering</div>
-            <div class="entry-detail">Ritsumeikan University, Kyoto, Japan</div>
-        </div>
-        
-        <div class="entry">
-            <span class="date">Mar. 2019</span>
-            <div class="entry-title">Japanese Language School</div>
-            <div class="entry-detail">Kansai Language Institute, Osaka, Japan</div>
-        </div>
-        
-        <div class="entry">
-            <span class="date">June 2017</span>
-            <div class="entry-title">B.Eng. in Electronic Information Engineering</div>
-            <div class="entry-detail">ShaoXing University, Shaoxing, China</div>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="section-title">PROFESSIONAL APPOINTMENTS</div>
-        
-        <div class="entry">
-            <span class="date">Apr. 2025 - Present</span>
-            <div class="entry-title">Assistant Professor (Project-based)</div>
-            <div class="entry-detail">Kobe University, School of System Informatics, Kobe, Japan</div>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="section-title">RESEARCH INTERESTS</div>
-        <div style="padding-left: 20px; text-align: justify;">
-            I am broadly interested in mobile communication networks, network performance analysis and optimization. 
-            Specifically, I have been focused on the following main themes:
-            <ul style="margin-top: 10px;">
-                <li><strong>5G/6G technologies:</strong> Handover optimization, mobility management, mmWave</li>
-                <li><strong>C-V2X:</strong> Resource allocation, Reinforcement learning</li>
-                <li><strong>Performance analysis:</strong> Network modeling, Petri nets, Poisson point process</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="section-title">TEACHING EXPERIENCE</div>
-        <ul>
-            <li>Exercise 2, Kobe University</li>
-            <li>Comprehensive Experiment 2, Kobe University</li>
-        </ul>
-    </div>
-
-    <div class="section">
-        <div class="section-title">PROFESSIONAL ACTIVITY</div>
-        
-        <div class="subsection-title">Committee Memberships</div>
-        <div class="entry">
-            <span class="date">June 2025 - Present</span>
-            <div>Committee Member, Sensor Network and Mobile Intelligence (SeMI) Research Technical Committee</div>
-        </div>
-        <div class="entry">
-            <span class="date">Aug. 2025</span>
-            <div>Program Committee Member, The 36th IEEE International Symposium on Software Reliability Engineering of AISQ Workshop</div>
-        </div>
-        
-        <div class="subsection-title">Presentations</div>
-        <div class="publication">
-            <div class="publication-number">1.</div>
-            <div class="publication-content"><span class="paper-title">A Study on gNodeB Type Encoding for Handover Control</span>, IEICE Society Conference 2025, September 2025.</div>
-        </div>
-        <div class="publication">
-            <div class="publication-number">2.</div>
-            <div class="publication-content"><span class="paper-title">Improving Handover Performance Using Cell ID-Based Decision Algorithm</span>, Sensor Network and Mobile Intelligence (SeMI) Forum 2025, June 2025.</div>
-        </div>
-        <div class="publication">
-            <div class="publication-number">3.</div>
-            <div class="publication-content"><span class="paper-title">A Study on Improving Handover Performance Based on Handover Direction in a HetNet</span>, IEICE General Conference 2025, March 2025.</div>
-        </div>
-        <div class="publication">
-            <div class="publication-number">4.</div>
-            <div class="publication-content"><span class="paper-title">Mitigating Handover Failures in HetNet Using Downlink CQI</span>, Kobe University Interdisciplinary Collaborative Research Presentation, March 2024.</div>
-        </div>
-        
-        <div class="subsection-title">Review</div>
-        <div style="padding-left: 20px;">
-            <strong>Journals:</strong> IEICE Transactions on Communications (EB), IEICE Transactions on Information and Systems (ED).
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="section-title">PUBLICATIONS</div>
-        
-        <div class="subsection-title">Journal Papers</div>
-        
-        <div class="publication">
-            <div class="publication-number">1.</div>
-            <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, E. Takimoto, P. Finnerty, and C. Ohta, <span class="paper-title">A CQI and Hysteretic-based Decision Algorithm to Prevent Handover Failures for Pedestrian Mobility in Mobile Communication HetNet</span>, <i>IEEE Access</i>, vol. 12, pp. 92348-92367, 2024.</div>
-        </div>
-        
-        <div class="publication">
-            <div class="publication-number">2.</div>
-            <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, J. Zheng, E. Takimoto, P. Finnerty, and C. Ohta, <span class="paper-title">Directional Handover Analysis with Stochastic Petri Net and Poisson Point Process in Heterogeneous Networks</span>, <i>Mathematics</i>, January 2025.</div>
-        </div>
-        
-        <div class="publication">
-            <div class="publication-number">3.</div>
-            <div class="publication-content">S. Chen, L. Yang, Y. Zhang, M. Zhang, Y. Xie, <span class="author-highlight">Z. Zhu</span>, and J. Li, <span class="paper-title">Digital Human Technology in E-Learning: Custom Content Solutions</span>, <i>Applied Sciences</i>, vol. 15(7), pp. 3807-3807, March 2025.</div>
-        </div>
-        
-        <div class="subsection-title">Conference Proceedings</div>
-        
-        <div class="publication">
-            <div class="publication-number">1.</div>
-            <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, E. Takimoto, P. Finnerty, and C. Ohta, <span class="paper-title">A Study on E2E Performance Improvement of Platooning Using Outdoor LiFi</span>, <i>IEEE 102nd Vehicular Technology Conference (VTC2025-Fall)</i>, October 2025.</div>
-        </div>
-        
-        <div class="publication">
-            <div class="publication-number">2.</div>
-            <div class="publication-content">Y. Sun, <span class="author-highlight">Z. Zhu</span>, P. Finnerty, and C. Ohta, <span class="paper-title">An Enhancement of RSSI-Based Localization Using Optimization Algorithm with RSSI Differential Value and Kalman Filter</span>, <i>IEEE GCCE</i>, September 2025.</div>
-        </div>
-        
-        <div class="publication">
-            <div class="publication-number">3.</div>
-            <div class="publication-content">S. Chen, L. Yang, Y. Xie, <span class="author-highlight">Z. Zhu</span>, J. Li, Y. Zhang, and M. Zhang, <span class="paper-title">Developing a Web Service for Creating E-Learning Video Using Digital Human and Educational Content</span>, <i>The 8th Eurasian Conference on Educational Innovation 2025 (ECEI 2025)</i>, February 2025.</div>
-        </div>
-        
-        <div class="publication">
-            <div class="publication-number">4.</div>
-            <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, J. Zheng, E. Takimoto, P. Finnerty, and C. Ohta, <span class="paper-title">Evaluating the A3RSRP Handover to Determine Optimal Performance in HetNet using Stochastic Petri Net</span>, <i>2024 6th International Conference on System Reliability and Safety Engineering (SRSE)</i>, pp. 469-474, October 2024.</div>
-        </div>
-        
-        <div class="publication">
-            <div class="publication-number">5.</div>
-            <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, C. Ohta, T. Kamada, E. Takimotol, and J. Zheng, <span class="paper-title">Evaluating the Effects of Different Handover Algorithms for Het-Nets Using Petri Nets</span>, <i>IEICE Technical Report NS seminar</i>, vol. 121(356), pp. 19-24, January 2022.</div>
-        </div>
-        
-        <div class="publication">
-            <div class="publication-number">6.</div>
-            <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, T. Nishimura, E. Takimoto, and J. Zheng, <span class="paper-title">Performance Evaluation of Heterogeneous Cellular Networks Using Stochastic Petri Nets</span>, <i>2021 International Conference on Software, Telecommunications and Computer Networks (SoftCOM)</i>, September 2021.</div>
-        </div>
-        
-        <div class="subsection-title">Technical Reports & Preprints</div>
-        
-        <div class="publication">
-            <div class="publication-number">1.</div>
-            <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, <span class="paper-title">Research on Handover Decision Algorithms for 5G Heterogeneous Networks</span>, <i>Ph.D. Dissertation</i>, Kobe University, September 2025.</div>
-        </div>
-        
-        <div class="publication">
-            <div class="publication-number">2.</div>
-            <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, E. Takimoto, P. Finnerty, J. Zheng, S. Suzuki, and C. Ohta, <span class="paper-title">NR Cell Identity-based Handover Decision-making Algorithm for High-speed Scenario within Dual Connectivity</span>, <i>arXiv preprint</i>, June 2025.</div>
-        </div>
-        
-        <div class="publication">
-            <div class="publication-number">3.</div>
-            <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, E. Takimoto, P. Finnerty, and C. Ohta, <span class="paper-title">A Study on E2E Performance Improvement of Platooning Using Outdoor LiFi</span>, <i>arXiv preprint</i>, June 2025.</div>
-        </div>
-        
-        <div class="publication">
-            <div class="publication-number">4.</div>
-            <div class="publication-content">Y. Shirasaki, P. Finnerty, <span class="author-highlight">Z. Zhu</span>, and C. Ohta, <span class="paper-title">A Study on Cache Policy Considering Regional Locality in Information-Oriented Networks</span>, <i>IEICE Technical Report NS</i>, vol. 125(57), pp. 37-42, May 2025.</div>
-        </div>
-        
-        <div class="publication">
-            <div class="publication-number">5.</div>
-            <div class="publication-content">S. Aihara, P. Finnerty, <span class="author-highlight">Z. Zhu</span>, and C. Ohta, <span class="paper-title">A Study on Job Scheduling Method Considering Business Hours</span>, <i>IPSJ HPC Workshop</i>, September 2025.</div>
-        </div>
-        
-        <div class="publication">
-            <div class="publication-number">6.</div>
-            <div class="publication-content"><span class="author-highlight">Z. Zhu</span>, J. Zheng, and E. Takimoto, <span class="paper-title">Performance Evaluation of Heterogeneous Cellular Networks Using Stochastic Petri Nets</span>, <i>IEICE Technical Report R</i>, vol. 121(64), pp. 19-24, June 2021.</div>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="section-title">RESEARCH GRANTS</div>
-        <div class="entry">
-            <span class="date">Nov. 2021 - Sep. 2024</span>
-            <div class="entry-title">Development of Performance Evaluation Method for Inter-Heterogeneous Network Handover Schemes Using Petri Nets</div>
-            <div class="entry-detail">Kobe University "Next-Generation Outstanding Doctoral Human Resources Development Project through Interdisciplinary Co-creation"</div>
-        </div>
-    </div>
-
-    <div class="section">
-        <div class="section-title">PROFESSIONAL MEMBERSHIPS</div>
-        <ul>
-            <li>Information Processing Society of Japan (IPSJ), April 2025 - Present</li>
-            <li>Operations Research Society of Japan (ORSJ), July 2022 - Present</li>
-            <li>IEEE Reliability Society, January 2022 - Present</li>
-            <li>IEEE Communications Society, January 2022 - Present</li>
-            <li>Institute of Electronics, Information and Communication Engineers (IEICE), December 2021 - Present</li>
-        </ul>
-    </div>
-
+    <!-- JavaScript for page switching -->
+    <script>
+        function showPage(pageId) {
+            // 隐藏所有页面
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // 移除所有导航链接的active状态
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // 显示选中的页面
+            document.getElementById(pageId).classList.add('active');
+            
+            // 给对应的导航链接添加active状态
+            event.target.classList.add('active');
+            
+            // 滚动到页面顶部
+            window.scrollTo(0, 0);
+        }
+    </script>
 </body>
 </html>
